@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float mouseSensitivity;
+    public Rigidbody rigidbody;
+
     [SerializeField] private Transform playerBody;          // 플레이어
     [SerializeField] private Transform cameraLocation;      // 카메라
     [SerializeField] private float moveSpeed = 1f;
@@ -13,10 +15,20 @@ public class PlayerController : MonoBehaviour
     {
         // 커서 지우기
         Cursor.lockState = CursorLockMode.Locked;
+
+        if(!TryGetComponent<Rigidbody>(out rigidbody))
+        {
+            rigidbody = gameObject.AddComponent<Rigidbody>();
+        }
     }
     void Update()
     {
         PlayerMove();
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            InteractionWithItem();
+        }
     }
 
     private void PlayerMove()
@@ -35,6 +47,18 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDir = playerBody.forward * vertical + playerBody.right * horizontal;
 
-        playerBody.Translate(moveDir.normalized * moveSpeed * Time.deltaTime, Space.World);
+        // playerBody.Translate(moveDir.normalized * moveSpeed * Time.deltaTime, Space.World);
+
+        rigidbody.velocity = moveDir.normalized * moveSpeed + new Vector3(0, rigidbody.velocity.y, 0);
+    }
+
+    private void PlayerJump()
+    {
+
+    }
+
+    private void InteractionWithItem()
+    {
+
     }
 }
