@@ -14,6 +14,7 @@ public enum ZoneType
 public class PlayerController : MonoBehaviour
 {
     public float mouseSensitivity;
+    public float jumpForce;
     public Rigidbody rigidbody;
     private ZoneType myZone;
 
@@ -53,6 +54,12 @@ public class PlayerController : MonoBehaviour
         {
             InteractionWithItem();
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerJump();
+        }
+
     }
 
     private void PlayerMove()
@@ -78,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-
+        rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     private void InteractionWithItem()
