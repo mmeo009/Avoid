@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Base_Scene.unity
     guid: 86dfb435f0fb12c4f9215bacc85ee390
   - enabled: 1
-    path: Assets/Scenes/Weird/Weird_Scene_11.unity
-    guid: 861dfeb2b2468274580960f5dcc691f8
-  - enabled: 1
     path: Assets/Scenes/Weird/Weird_Scene_1.unity
     guid: 2f2c09eb9b0a71b4e9d16ff2918fa87a
   - enabled: 1
@@ -42,6 +39,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Weird/Weird_Scene_10.unity
     guid: a5382a715e634f14aafdb56700b17471
   - enabled: 1
+    path: Assets/Scenes/Weird/Weird_Scene_11.unity
+    guid: 861dfeb2b2468274580960f5dcc691f8
+  - enabled: 1
     path: Assets/Scenes/Weird/Weird_Scene_12.unity
     guid: 6ac86d8d70d98604f949a61c4e48c5d0
   - enabled: 1
@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Weird/Weird_Scene_15.unity
     guid: 7f0b2836581f93d4aa5b15088bf6b4fc
+  - enabled: 1
+    path: Assets/Scenes/Weird/Weird_Scene_16.unity
+    guid: 9ff2ab8b7d78949418c780774163adfa
   m_configObjects: {}

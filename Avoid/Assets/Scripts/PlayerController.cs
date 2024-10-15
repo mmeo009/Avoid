@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public Rigidbody rigidbody;
     private ZoneType myZone;
-    const int sceneAmount = 15;
+    const int sceneAmount = 17;
 
     private static event Action<ZoneType> OnPlayerEnterInteractionZone;
     private static event Action OnPlayerExitInteractionZone;
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
     }
     public string GetRandomSceneName()
     {
-        int sceneNum = UnityEngine.Random.Range(0, sceneAmount + 1);
+        int sceneNum = UnityEngine.Random.Range(0, sceneAmount);
         string sceneName;
 
         if (sceneNum == 0)
