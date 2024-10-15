@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public enum ZoneType
 {
     NONE,
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public Rigidbody rigidbody;
     private ZoneType myZone;
+    const int sceneAmount = 15;
 
     private static event Action<ZoneType> OnPlayerEnterInteractionZone;
     private static event Action OnPlayerExitInteractionZone;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
 
-        if(Input.GetKeyDown(KeyCode.E) && myZone != ZoneType.NONE)
+        if(Input.GetKeyDown(KeyCode.E) && (myZone == ZoneType.DOOR || myZone == ZoneType.BED))
         {
             InteractionWithItem();
         }
@@ -90,7 +91,33 @@ public class PlayerController : MonoBehaviour
 
     private void InteractionWithItem()
     {
-
+        if(myZone != ZoneType.EXIT && myZone != ZoneType.NONE)
+        {
+            string nowScene = SceneManager.GetActiveScene().name;
+            Debug.Log($"SceneName : {nowScene}");
+            if (nowScene.Contains("Weird"))
+            {
+                if(myZone == ZoneType.BED)
+                {
+                    SceneManager.LoadScene(nowScene);
+                }
+                else
+                {
+                    SceneManager.LoadScene(GetRandomSceneExeptNowScene());
+                }
+            }
+            else
+            {
+                if (myZone == ZoneType.DOOR)
+                {
+                    SceneManager.LoadScene(nowScene);
+                }
+                else
+                {
+                    SceneManager.LoadScene(GetRandomSceneExeptNowScene());
+                }
+            }
+        }
     }
 
     private void EnterInteractionZone(ZoneType zoneType)
@@ -140,5 +167,31 @@ public class PlayerController : MonoBehaviour
     {
         zoneInteractionHelper.SetActive(false);
         myZone = ZoneType.NONE;
+    }
+
+    public string GetRandomSceneExeptNowScene()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        while (sceneName == SceneManager.GetActiveScene().name)
+        {
+            sceneName = GetRandomSceneName();
+        }
+        return sceneName;
+    }
+    public string GetRandomSceneName()
+    {
+        int sceneNum = UnityEngine.Random.Range(0, sceneAmount + 1);
+        string sceneName;
+
+        if (sceneNum == 0)
+        {
+            sceneName = "Base_Scene";
+        }
+        else
+        {
+            sceneName = "Weird_Scene_" + sceneNum.ToString();
+        }
+        return sceneName;
     }
 }
