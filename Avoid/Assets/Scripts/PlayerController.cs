@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (zoneType == ZoneType.EXIT)
         {
+            zoneInteractionHelper.SetActive(false);
             myZone = ZoneType.EXIT;
         }
         else
@@ -114,6 +115,26 @@ public class PlayerController : MonoBehaviour
             zoneInteractionHelper.SetActive(false);
             return;
         }    
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("BED"))
+        {
+            EnterInteractionZone(ZoneType.BED);
+        }
+        else if(other.CompareTag("DOOR"))
+        {
+            EnterInteractionZone(ZoneType.DOOR);
+        }
+        else
+        {
+            EnterInteractionZone(ZoneType.EXIT);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        EnterInteractionZone(ZoneType.EXIT);
     }
     private void ExitInteractionZone()
     {
